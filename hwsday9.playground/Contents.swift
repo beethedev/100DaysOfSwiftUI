@@ -20,12 +20,10 @@ var greeting = "Hello, playground"
 
 let luckyNumbers = [7, 4, 38, 21, 16, 15, 12, 33, 31, 49]
 
-func filterSortMap(no:[Int]) -> [String] {
-    return no.filter{$0.isMultiple(of: 2) == false}.sorted().map{String("\($0) is a lucky number")}
+let filterSortMap = luckyNumbers.filter{$0.isMultiple(of: 2) == false}.sorted().map{String("\($0) is a lucky number")}
     
-}
 
-for luckyNumber in filterSortMap(no: luckyNumbers){
+for luckyNumber in filterSortMap{
     print(luckyNumber)
 }
 //print(result)

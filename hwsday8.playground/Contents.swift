@@ -22,7 +22,8 @@ func findSqrt(of number: Int) throws -> Int{
     } else if number < 1 || number > 10_000 {
         throw sqrtError.outOfBounds
     } else if result == 0 {
-        throw sqrtError.noRoot}
+        throw sqrtError.noRoot
+    }
     return result
 }
 

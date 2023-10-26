@@ -26,4 +26,5 @@ let filterSortMap = luckyNumbers.filter{$0.isMultiple(of: 2) == false}.sorted().
 for luckyNumber in filterSortMap{
     print(luckyNumber)
 }
-//print(result)
+//Solution 2
+luckyNumbers.filter{!$0.isMultiple(of: 2)}.sorted().map{print("\($0) is a lucky number")}

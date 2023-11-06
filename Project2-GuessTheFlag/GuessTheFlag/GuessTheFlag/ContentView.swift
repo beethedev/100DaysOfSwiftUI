@@ -60,8 +60,10 @@ struct ContentView: View {
                             flagTapped(number)
                         } label: {
                             Image(countries[number])
-                                .clipShape(.capsule)
-                                .shadow(radius: 5)
+                                .FlagStyle() 
+                                //.modifier(FlagImage())
+                                //.clipShape(.capsule)
+                                //.shadow(radius: 5)
                         }
                     }
                 }
@@ -115,6 +117,22 @@ struct ContentView: View {
         askQuestion()
         }
     }
+
+
+// Prject 3 technical challenge additions
+struct FlagImage: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .clipShape(.capsule)
+            .shadow(radius: 5)
+    }
+}
+
+extension View {
+    func FlagStyle() -> some View {
+        modifier(FlagImage())
+    }
+}
 
 #Preview {
     ContentView()

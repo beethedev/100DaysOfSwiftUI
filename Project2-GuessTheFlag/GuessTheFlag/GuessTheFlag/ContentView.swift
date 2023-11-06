@@ -59,9 +59,8 @@ struct ContentView: View {
                         Button {
                             flagTapped(number)
                         } label: {
-                            Image(countries[number])
-                                .FlagStyle() 
-                                //.modifier(FlagImage())
+                            FlagImage(image: countries[number])
+                            //Image(countries[number])
                                 //.clipShape(.capsule)
                                 //.shadow(radius: 5)
                         }
@@ -77,7 +76,7 @@ struct ContentView: View {
                     Text(messageText)
                 }
                 .alert("Game Over", isPresented: $restartGame){
-                    Button("Restart", action: restart)
+                    Button("Play Again", action: restart)
                 } message: {
                     Text("Your Final Score is \(userScore)")
                 }
@@ -119,20 +118,18 @@ struct ContentView: View {
     }
 
 
-// Prject 3 technical challenge additions
-struct FlagImage: ViewModifier {
-    func body(content: Content) -> some View {
-        content
+// Prject 3 technical challenge additions using view composition
+
+struct FlagImage: View {
+    var image: String
+    
+    var body: some View {
+        Image(image)
             .clipShape(.capsule)
             .shadow(radius: 5)
     }
 }
 
-extension View {
-    func FlagStyle() -> some View {
-        modifier(FlagImage())
-    }
-}
 
 #Preview {
     ContentView()

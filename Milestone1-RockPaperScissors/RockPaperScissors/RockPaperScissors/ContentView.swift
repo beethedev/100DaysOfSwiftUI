@@ -14,7 +14,7 @@ struct ContentView: View {
     @State private var showingScore = false
     @State private var gameOver = false
     
-    let moves = ["Rock", "Paper", "Scissors"]
+    let moves = ["Rock 🪨", "Paper 📃", "Scissors ✄"]
     
     @State private var appMove = Int.random(in: 0...2)
     @State private var shouldWin = Bool.random()
@@ -22,98 +22,109 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack{
-            VStack{
-                Text("Score: \(score)")
-                    .font(.largeTitle)
-                    .bold()
-                    .padding()
+            ZStack{
+                LinearGradient(colors: [.yellow, .pink], startPoint: .top, endPoint: .bottom)
                 
-                Text("Computer move: \(moves[appMove])")
-                    .font(.system(size: 25))
-                    .bold()
-                
-                
-                if shouldWin {
-                    Text("Win : Yes")
-                        .padding()
-                        .font(.title2)
-                        .bold()
-                } else {
-                    Text("Win: No")
-                        .padding()
-                        .font(.title2)
-                        .bold()
-                }
-                
-                ForEach(moves, id:\.self) { move in
-                    Button(move) {
-                        tapped(move)
-                    }
-                    .font(.system(size: 20))
-                    .alert("Score" + ": \(score)", isPresented: $showingScore){
-                        Button("Continue", action: askQuestion)
-                    } message: {
-                        Text(messageText)
-                    }
-                    .alert("Game Over", isPresented: $gameOver){
-                        Button("Play Again", action: restart)
-                    } message: {
-                        Text("Your Final Score is \(score)")
-                    }
-                    .padding()
-                    .background(.blue)
-                    .foregroundStyle(.white)
-                    .clipShape(.capsule)
-                }
-                .padding()
+                VStack {
+                    Spacer()
+                    Spacer()
+                    Spacer()
                     
+                    Text("Score - \(score)")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding()
+                    
+                    Spacer()
+                    
+                    Text("Computer move: \(moves[appMove])")
+                        .font(.title.weight(.semibold))
+                    
+                    
+                    if shouldWin {
+                        Text("Play to win - Yes")
+                            .padding()
+                            .font(.title2.weight(.semibold))
+                    } else {
+                        Text("Play to win - No")
+                            .padding()
+                            .font(.title2.weight(.semibold))
+                    }
+                    
+                    ForEach(moves, id:\.self) { move in
+                        Button(move) {
+                            tapped(move)
+                        }
+                        .font(.system(size: 20))
+                        .alert("Score" + ": \(score)", isPresented: $showingScore){
+                            Button("Continue", action: askQuestion)
+                        } message: {
+                            Text(messageText)
+                        }
+                        .alert("Game Over", isPresented: $gameOver){
+                            Button("Play Again", action: restart)
+                        } message: {
+                            Text("Your Final Score is \(score)")
+                        }
+                        .padding()
+                        .background(.ultraThinMaterial)
+                        .foregroundStyle(.primary)
+                        .clipShape(.capsule)
+                    }
+                    .padding(20)
+                    
+                    Spacer()
+                    Spacer()
                 }
                 .navigationTitle("Rock-Paper-Scissors")
             }
+            .ignoresSafeArea()
         }
         
-        func tapped(_ move:String) {
-            let playerChoice = move
-            let appChoice = moves[appMove]
+    }
+        
+    
+    func tapped(_ move:String) {
+        let playerChoice = move
+        let appChoice = moves[appMove]
             
-            switch appChoice{
-            case "Rock":
-                if playerChoice == "Paper"{
-                    score += 1
-                    messageText = "Correct! you get one point."
-                } else {
-                    score -= 1
-                    messageText = "Uh oh, you lose a point."
-                }
-            case "Scissors":
-                if playerChoice == "Rock"{
-                    score += 1
-                    messageText = "Correct! you get one point."
-                } else {
-                    score -= 1
-                    messageText = "Uh oh, you lose a point."
-                }
-            default:
-                if playerChoice == "Scissors"{
-                    score += 1
-                    messageText = "Correct! you get one point."
-                } else {
-                    score -= 1
-                    messageText = "Uh oh, you lose a point."
-                }
+        switch appChoice{
+        case "Rock 🪨":
+            if playerChoice == "Paper 📃"{
+                score += 1
+                messageText = "Correct! you get one point."
+            } else {
+                score -= 1
+                messageText = "Uh oh, you lose a point."
             }
-            
-            shouldWin.toggle()
-            playCount += 1
-            //appMove = Int.random(in: 0...2)
-            
-            if playCount > 10 {
-                gameOver = true
+        case "Scissors ✄":
+            if playerChoice == "Rock 🪨"{
+                score += 1
+                messageText = "Correct! you get one point."
+            } else {
+                score -= 1
+                messageText = "Uh oh, you lose a point."
             }
-            
-            showingScore = true
-            
+        default:
+            if playerChoice == "Scissors ✄"{
+                score += 1
+                messageText = "Correct! you get one point."
+            } else {
+                score -= 1
+                messageText = "Uh oh, you lose a point."
+            }
         }
+            
+        shouldWin.toggle()
+        playCount += 1
+        
+        if playCount > 10 {
+            gameOver = true
+        }
+            
+        showingScore = true
+            
+    }
     
     func askQuestion() {
         appMove = Int.random(in: 0...2)

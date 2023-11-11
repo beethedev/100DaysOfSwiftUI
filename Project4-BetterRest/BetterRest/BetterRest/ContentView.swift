@@ -76,7 +76,7 @@ struct ContentView: View {
     
     
     func calculateBedtime() -> String {
-        do {
+        do {        
             let config = MLModelConfiguration()
             let model = try SleepCalculator(configuration: config)
             

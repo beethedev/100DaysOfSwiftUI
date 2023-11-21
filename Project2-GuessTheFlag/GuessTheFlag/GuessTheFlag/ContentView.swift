@@ -19,6 +19,12 @@ struct ContentView: View {
     @State private var count = 0
     @State private var messageText = ""
     
+    @State private var animationAmount = 0.0
+    @State private var tappedFlag = 0
+    @State private var transperency = 1.0
+    @State private var scaleAmount = 1.0
+    
+    
     var body: some View {
         
         ZStack {
@@ -52,18 +58,29 @@ struct ContentView: View {
                             .foregroundStyle(.secondary)
                         Text(countries[correctAnswer])
                             .font(.largeTitle.weight(.semibold))
-                            //.foregroundStyle(.white)
+                        //.foregroundStyle(.white)
                     }
                     
                     ForEach(0..<3) { number in
                         Button {
                             flagTapped(number)
+                            withAnimation{
+                                animationAmount += 360
+                                transperency = 0.25
+                                scaleAmount = 0.7
+                            }
                         } label: {
                             FlagImage(image: countries[number])
                             //Image(countries[number])
-                                //.clipShape(.capsule)
-                                //.shadow(radius: 5)
+                            //.clipShape(.capsule)
+                            //.shadow(radius: 5)
                         }
+                        .scaleEffect(tappedFlag != number ? scaleAmount : 1)
+                        .opacity(tappedFlag != number ? transperency : 1)
+                        .rotation3DEffect(
+                            .degrees(tappedFlag == number ? animationAmount : 0),
+                            axis: (x: 0.0, y: 1.0, z: 0.0)
+                        )
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -80,17 +97,21 @@ struct ContentView: View {
                 } message: {
                     Text("Your Final Score is \(userScore)")
                 }
-                
             }
             .padding()
+            
         }
     }
     
+  
+    
     func flagTapped(_ number: Int) {
+        tappedFlag = number
         if number == correctAnswer {
             scoreTitle = "Correct"
             userScore += 1 //Challenge 1 solution
             messageText = "Your Score is \(userScore)"
+            
         } else {
             scoreTitle = "Wrong, that is the flag for \(countries[number])" //Challenge 2 solution
         }
@@ -107,6 +128,9 @@ struct ContentView: View {
         if count == 8{
             restartGame = true
         }
+        transperency = 1.0
+        tappedFlag = 0
+        scaleAmount = 1
     }
     
     

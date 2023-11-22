@@ -9,7 +9,7 @@ import SwiftUI
 
 
 
-struct AddView: View {    
+struct AddView: View {
     @Environment(\.dismiss) var dismiss
     
     @State private var name = ""
@@ -31,7 +31,7 @@ struct AddView: View {
                         }
                     }
 
-                    TextField("Amount", value: $amount, format: .currency(code: "USD"))
+                    TextField("Amount", value: $amount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
                         .keyboardType(.decimalPad)
                 }
                 .navigationTitle("Add new expense")

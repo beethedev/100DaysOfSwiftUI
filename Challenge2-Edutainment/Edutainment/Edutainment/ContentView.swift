@@ -33,38 +33,53 @@ struct ContentView: View {
         NavigationStack{
             ZStack{
                 
-                Color(.blue)
-                    .opacity(0.8)
+                LinearGradient(colors: [.yellow, .pink], startPoint: .top, endPoint:.bottom)
                     .ignoresSafeArea()
                 
                 VStack{
-                    Form {
-                        // Pick nos to multiply from 2 to 12
-                        Section("Choose a number between 2 and 12"){
-                            Stepper("\(noToMultiply)", value: $noToMultiply, in: 2...12, step:1)
-                        }
-                        
-                        //Pick how many numbers to practice
-                        Section("How many questions do you want"){
-                            Picker("", selection: $question){
-                                ForEach(questions, id:\.self) {
-                                    Text("\($0) questions")
-                                }
-                            }
-                            .pickerStyle(.segmented)
-                        }
-                    }
-                
-                    VStack(spacing: 15) {
-                        //Spacer()
+                    
+                    VStack{
                         Text("Score - \(score)").font(.title)
+                            .bold()
+                        
+                        Spacer()
+
+                        Text("Choose a times table between 2 and 12")
+                            .font(.title3)
+                        
+                        Stepper("\(noToMultiply)", value: $noToMultiply, in: 2...12, step:1)
+                        .frame(maxWidth: 150)
+                        
+                        Spacer()
+                    
+                        Text("How many practice questions do you want?")
+                            .font(.title3)
+                        Picker("", selection: $question){
+                            ForEach(questions, id:\.self) {
+                                Text("\($0)")
+                            }
+                        }
+                        .pickerStyle(.segmented)
+                        .frame(maxWidth: 200)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 25)
+                    .background(.regularMaterial)
+                    .clipShape(.rect(cornerRadius: 20))
+                    
+                    Spacer()
+                    Spacer()
+                    
+                    VStack(spacing: 15) {
+                        Spacer()
                         
                         Image(icons[number])
-                            //.animation(.default, value: animationAmount)
                             .rotation3DEffect(
                                 .degrees(animateIcon ? animationAmount : 0.0),axis: (x: 0.0, y: 1.0, z: 0.0)
                             )
                             .animation(.default, value: animateIcon)
+                        
+                        Spacer()
                         
                         Text("What is \(noToMultiply) x \(number) ?")
                             .font(.title2).bold()
@@ -82,7 +97,7 @@ struct ContentView: View {
                             .alert("Game Over", isPresented: $restartGame){
                                 Button("Play Again", action: restart)
                             } message: {
-                                Text("Your Final Score is \(score)")
+                                Text("Your Final Score is \(score)/\(question)")
                             }
                         
                         Spacer()
@@ -97,12 +112,12 @@ struct ContentView: View {
                         .padding()
                         .background(.green)
                         .fontWeight(.bold)
-                        .foregroundStyle(.white)
                         .clipShape(.capsule)
                     }
                     .foregroundStyle(.white)
                 }
-                .navigationTitle("Learn Times Tables")
+                .navigationTitle("MultiplyWithMe")
+                .padding()
             }
         }
     }
@@ -122,7 +137,6 @@ struct ContentView: View {
         }
         showingScore = true
         count += 1
-        //correctAnswer = 0
     }
     
     func askQuestion(){

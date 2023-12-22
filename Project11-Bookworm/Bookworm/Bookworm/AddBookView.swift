@@ -16,8 +16,23 @@ struct AddBookView: View {
     @State private var rating = 3
     @State private var genre = "Fantasy"
     @State private var review = ""
+//    @State private var date = Date.now
     
-    let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller"]
+    var isBookValid : Bool {
+        if title.isEmpty || author.isEmpty {
+            return false
+        }
+        return true
+    }
+    
+//    var unknownGenre : Bool {
+//        if genre.isEmpty {
+//            return true
+//        }
+//        return false
+//    }
+    
+    let genres = ["Fantasy", "Horror", "Kids", "Mystery", "Poetry", "Romance", "Thriller", "Other"]
     
     var body: some View {
         NavigationStack {
@@ -40,11 +55,13 @@ struct AddBookView: View {
                 
                 Section {
                     Button("Save") {
+//                        let genre = unknownGenre ? genre : "Unknown"
                         let newBook = Book(title: title, author: author, genre: genre, review: review, rating: rating)
                         modelContext.insert(newBook)
                         dismiss()
                     }
                 }
+                .disabled(isBookValid == false)
             }
             .navigationTitle("Add Book")
         }

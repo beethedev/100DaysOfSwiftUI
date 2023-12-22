@@ -4,100 +4,102 @@
 //
 //  Created by Busayo Ajide on 11/17/23.
 //
-
+import SwiftData
 import SwiftUI
 
-struct ExpenseItem: Identifiable, Codable {
-    var id = UUID()
-    let name: String
-    let type: String
-    let amount: Double
-}
-
-@Observable
-class Expenses {
-    var items = [ExpenseItem]() {
-        didSet {
-            if let encoded = try? JSONEncoder().encode(items) {
-                UserDefaults.standard.set(encoded, forKey: "Items")
-            }
-        }
-    }
-    
-    init() {
-        if let savedItems = UserDefaults.standard.data(forKey: "Items") {
-            if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItems) {
-                items = decodedItems
-                return
-            }
-        }
-
-        items = []
-    }
-}
 
 struct ContentView: View {
+    
+    @Environment(\.modelContext) var modelContext
+    @Query (sort: \Expenses.amount) var expenses : [Expenses]
 
-    @State private var expenses = Expenses()
+    @State private var path = [Expenses]()
     @State private var showingAddExpense = false
     
+    @State private var sortOrder = [
+        SortDescriptor(\Expenses.amount),
+        SortDescriptor(\Expenses.name),
+    ]
+    
+    @State private var showingAll = true
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack(path : $path){
             List {
                 Section("Personal Expenses"){
-                    ForEach(expenses.items) { item in
-                        if item.type == "Personal" {
+                    ForEach(expenses) { expense in
+                        if expense.type == "Personal" {
                             HStack {
                                 VStack(alignment: .leading) {
-                                    Text(item.name)
+                                    Text(expense.name)
                                         .font(.headline)
-                                    //Text(item.type)
                                 }
-                                
                                 Spacer()
-                                Text(item.amount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
-                                    .foregroundColor(colorStyle(item.amount))
+                                Text(expense.amount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
+                                    .foregroundColor(colorStyle(expense.amount))
                                     .bold()
                             }
                         }
                     }
-                    .onDelete(perform: removeItems)
                 }
+                
                 Section("Business Expenses"){
-                    ForEach(expenses.items) { item in
-                        if item.type == "Business" {
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(item.name)
-                                        .font(.headline)
-                                    //Text(item.type)
+                    ForEach(expenses) { expense in
+                        if expense.type == "Business" {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(expense.name)
+                                            .font(.headline)
+                                    }
+                                    Spacer()
+                                    Text(expense.amount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
+                                        .foregroundColor(colorStyle(expense.amount))
+                                        .bold()
                                 }
-                                
-                                Spacer()
-                                Text(item.amount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
-                                    .foregroundColor(colorStyle(item.amount))
-                                    .bold()
-                            }
                         }
                     }
-                    .onDelete(perform: removeItems)
                 }
             }
             .navigationTitle("iExpense")
             .toolbar {
-                NavigationLink("Add Expense") {
-                        AddView(expenses: expenses)
+                Button("Add Expense", systemImage: "plus") {
+                    showingAddExpense.toggle()
+                    }
+                
+                Menu("Sort", systemImage: "arrow.up.arrow.down") {
+                    
+                    Picker("Sort", selection: $sortOrder) {
+                        Text("Sort by Name")
+                            .tag([
+                                SortDescriptor(\Expenses.name),
+                                SortDescriptor(\Expenses.amount),
+                            ])
+                        
+                        Text("Sort by Amount")
+                            .tag([
+                                SortDescriptor(\Expenses.amount),
+                                SortDescriptor(\Expenses.name)
+                            ])
                     }
                 }
             }
-        //.sheet(isPresented: $showingAddExpense) {
-          //  AddView(expenses: expenses)
-        //}
+            .sheet(isPresented: $showingAddExpense) {
+                AddView()
+            }
+            
+           
+        }
+        
     }
     
-    func removeItems(at offsets: IndexSet) {
-        expenses.items.remove(atOffsets: offsets)
-    }
+//    init(minimumExpense: Double, sortOrder: [SortDescriptor<Expenses>]) {
+//        _expenses = Query(filter: #Predicate<Expenses> { expense in
+//            expense.amount >= minimumExpense
+//        }, sort: sortOrder)
+//    }
+//    func removeItems(at offsets: IndexSet) {
+//        expenses.items.remove(atOffsets: offsets)
+//    }
     
     func colorStyle(_ amount:Double) -> Color{
         if amount <= 10 {

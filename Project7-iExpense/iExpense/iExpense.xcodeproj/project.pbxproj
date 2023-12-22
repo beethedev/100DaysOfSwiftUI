@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		665324352B2E6CF00082075F /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665324342B2E6CF00082075F /* Expense.swift */; };
 		6678CD092B0852B7007C7B9E /* iExpenseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6678CD082B0852B7007C7B9E /* iExpenseApp.swift */; };
 		6678CD0B2B0852B7007C7B9E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6678CD0A2B0852B7007C7B9E /* ContentView.swift */; };
 		6678CD0D2B0852B9007C7B9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6678CD0C2B0852B9007C7B9E /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		665324342B2E6CF00082075F /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		6678CD052B0852B7007C7B9E /* iExpense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iExpense.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6678CD082B0852B7007C7B9E /* iExpenseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iExpenseApp.swift; sourceTree = "<group>"; };
 		6678CD0A2B0852B7007C7B9E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			children = (
 				6678CD082B0852B7007C7B9E /* iExpenseApp.swift */,
 				6678CD0A2B0852B7007C7B9E /* ContentView.swift */,
+				665324342B2E6CF00082075F /* Expense.swift */,
 				66FF07B62B0C2A5100957D5F /* AddView.swift */,
 				6678CD0C2B0852B9007C7B9E /* Assets.xcassets */,
 				6678CD0E2B0852BA007C7B9E /* Preview Content */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				665324352B2E6CF00082075F /* Expense.swift in Sources */,
 				6678CD0B2B0852B7007C7B9E /* ContentView.swift in Sources */,
 				6678CD092B0852B7007C7B9E /* iExpenseApp.swift in Sources */,
 				66FF07B72B0C2A5100957D5F /* AddView.swift in Sources */,

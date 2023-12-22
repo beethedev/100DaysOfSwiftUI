@@ -4,13 +4,16 @@
 //
 //  Created by Busayo Ajide on 11/20/23.
 //
-
+import SwiftData
 import SwiftUI
 
 
 
 struct AddView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) var modelContext
+    
+    @Query var expenses : [Expenses]
     
     @State private var name = ""
     @State private var title = "Expense name"
@@ -19,29 +22,27 @@ struct AddView: View {
     
 
     let types = ["Business", "Personal"]
-    var expenses: Expenses
 
         var body: some View {
             NavigationStack {
-                Form {
-                    //TextField("Name", text: $name)
-
+                Form{
+                    TextField("Name", text: $name)
                     Picker("Type", selection: $type) {
                         ForEach(types, id: \.self) {
                             Text($0)
                         }
                     }
-
                     TextField("Amount", value: $amount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))
                         .keyboardType(.decimalPad)
                 }
-                .navigationTitle($title)
+                .navigationTitle("Add Expense")
+                .navigationBarBackButtonHidden()
+                .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .confirmationAction){
                         Button("Save") {
-                            //let item = ExpenseItem(name: name, type: type, amount: amount)
-                            let item = ExpenseItem(name: title, type: type, amount: amount)
-                            expenses.items.append(item)
+                            let expense = Expenses(name: name, type: type, amount: amount)
+                            modelContext.insert(expense)
                             dismiss()
                         }
                     }
@@ -51,12 +52,11 @@ struct AddView: View {
                         }
                     }
                 }
-                .navigationBarBackButtonHidden()
-                .navigationBarTitleDisplayMode(.inline)
+                
             }
         }
 }
 
 #Preview {
-    AddView(expenses: Expenses())
+    AddView()
 }

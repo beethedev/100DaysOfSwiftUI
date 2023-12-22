@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "0CFDD10A-195B-4C2A-B814-55753AE8A0B1"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4EC65B40-F249-4FB3-99EC-B5F4895B5899"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FriendFace/ContentView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "downloadJson()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4EC65B40-F249-4FB3-99EC-B5F4895B5899 - 5e0a8bdba46228ff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for FriendFace.ContentView.downloadJson() async -&gt; ()"
+                  moduleName = "FriendFace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/busayoajide/Documents/100DaysOfSwiftUI/Challenge4-FriendFace/FriendFace/FriendFace/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "556">
+               </Location>
+               <Location
+                  uuid = "4EC65B40-F249-4FB3-99EC-B5F4895B5899 - 5e0a8bdba46228ff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for FriendFace.ContentView.downloadJson() async -&gt; ()"
+                  moduleName = "FriendFace"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/busayoajide/Documents/100DaysOfSwiftUI/Challenge4-FriendFace/FriendFace/FriendFace/ContentView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "660">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

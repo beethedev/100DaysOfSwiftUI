@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var selectedItem: PhotosPickerItem?
     @State private var processedImage: Image?
     @State private var filterIntensity = 0.5
+    @State private var filterRadius = 0.5
     @State private var currentFilter: CIFilter = CIFilter.sepiaTone()
     @State private var showingFilters = false
     @AppStorage("filterCount") var filterCount = 0
@@ -44,12 +45,25 @@ struct ContentView: View {
                 HStack {
                     Text("Intensity")
                     Slider(value: $filterIntensity)
+                        .disabled(processedImage == nil)
                         .onChange(of: filterIntensity, applyProcessing)
+
+                }
+//                .padding(.vertical)
+                
+                HStack {
+                    Text("Radius")
+                    Slider(value: $filterRadius)
+                        .disabled(processedImage == nil)
+                        .onChange(of: filterRadius, applyProcessing)
+                        
                 }
                 .padding(.vertical)
+                
 
                 HStack {
                     Button("Change Filter", action: changeFilter)
+                        .disabled(processedImage == nil)
 
                     Spacer()
 
@@ -69,6 +83,9 @@ struct ContentView: View {
                 Button("Sepia Tone") { setFilter(CIFilter.sepiaTone()) }
                 Button("Unsharp Mask") { setFilter(CIFilter.unsharpMask()) }
                 Button("Vignette") { setFilter(CIFilter.vignette()) }
+                Button("Circular Wrap") { setFilter(CIFilter.circularWrap()) }
+                Button("Color Monochrome") { setFilter(CIFilter.colorMonochrome()) }
+                Button("Glass Distortion") { setFilter(CIFilter.glassDistortion()) }
                 Button("Cancel", role: .cancel) { }
             }
         }
@@ -94,7 +111,8 @@ struct ContentView: View {
         let inputKeys = currentFilter.inputKeys
 
         if inputKeys.contains(kCIInputIntensityKey) { currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey) }
-        if inputKeys.contains(kCIInputRadiusKey) { currentFilter.setValue(filterIntensity * 200, forKey: kCIInputRadiusKey) }
+        if inputKeys.contains(kCIInputRadiusKey) {
+            currentFilter.setValue(filterRadius * 200, forKey: kCIInputRadiusKey) }
         if inputKeys.contains(kCIInputScaleKey) { currentFilter.setValue(filterIntensity * 10, forKey: kCIInputScaleKey) }
 
         guard let outputImage = currentFilter.outputImage else { return }

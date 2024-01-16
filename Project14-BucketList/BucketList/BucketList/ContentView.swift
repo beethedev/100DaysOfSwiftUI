@@ -20,34 +20,61 @@ struct ContentView: View {
     )
     
     @State private var viewModel = ViewModel()
+    @State private var hybridMapstyle = false
+    
+    
     
     var body: some View {
         if viewModel.isUnlocked {
-            MapReader { proxy in
-                Map(initialPosition: startPosition) {
-                    ForEach(viewModel.locations) { location in
-                        Annotation(location.name, coordinate: location.coordinate) {
-                            Image(systemName: "star.circle")
-                                .resizable()
-                                .foregroundStyle(.red)
-                                .frame(width: 44, height: 44)
-                                .background(.white)
-                                .clipShape(.circle)
-                                .onLongPressGesture {
-                                    viewModel.selectedPlace = location
-                                }
+            ZStack(alignment: .topTrailing){
+                MapReader { proxy in
+                    Map(initialPosition: startPosition) {
+                        ForEach(viewModel.locations) { location in
+                            Annotation(location.name, coordinate: location.coordinate) {
+                                Image(systemName: "star.circle")
+                                    .resizable()
+                                    .foregroundStyle(.red)
+                                    .frame(width: 44, height: 44)
+                                    .background(.white)
+                                    .clipShape(.circle)
+                                    .onLongPressGesture {
+                                        viewModel.selectedPlace = location
+                                    }
+                            }
+                        }
+                    }
+                    .mapStyle(hybridMapstyle ? .hybrid : .standard)
+                    .onTapGesture { position in
+                        if let coordinate = proxy.convert(position, from: .local) {
+                            viewModel.addLocation(at: coordinate)
+                        }
+                    }
+                    .sheet(item: $viewModel.selectedPlace) { place in
+                        EditView(location: place) {
+                            viewModel.update(location: $0)
                         }
                     }
                 }
-                .onTapGesture { position in
-                    if let coordinate = proxy.convert(position, from: .local) {
-                        viewModel.addLocation(at: coordinate)
+                HStack{
+                    Button("Hybrid"){
+                        hybridMapstyle = true
                     }
-                }
-                .sheet(item: $viewModel.selectedPlace) { place in
-                    EditView(location: place) {
-                        viewModel.update(location: $0)
+                    .padding(10)
+                    .background(.black.opacity(0.75))
+                    .foregroundStyle(.white)
+                    .clipShape(.capsule)
+                    .offset(x: 5, y: -5)
+                    
+                    Spacer()
+                    
+                    Button("Standard"){
+                        hybridMapstyle = false
                     }
+                    .padding(10)
+                    .background(.blue.opacity(0.75))
+                    .foregroundStyle(.white)
+                    .clipShape(.capsule)
+                    .offset(x: -5, y: -5)
                 }
             }
         } else {
@@ -57,6 +84,11 @@ struct ContentView: View {
                 .background(.blue)
                 .foregroundStyle(.white)
                 .clipShape(.capsule)
+                .alert("Error", isPresented: $viewModel.showingError){
+                    Button("Cancel", role: .cancel) { }
+                } message: {
+                    Text(viewModel.errorMessage)
+                }
 
         }
     }

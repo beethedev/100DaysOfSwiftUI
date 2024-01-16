@@ -9,6 +9,8 @@ import SwiftUI
 
 struct EditView: View {
     @Environment(\.dismiss) var dismiss
+    
+    var onSave: (Location) -> Void
     var location: Location
 
     @State private var name: String
@@ -22,14 +24,7 @@ struct EditView: View {
         _description = State(initialValue: location.description)
     }
     
-    var onSave: (Location) -> Void
-    
-    enum LoadingState {
-        case loading, loaded, failed
-    }
-    
-    @State private var loadingState = LoadingState.loading
-    @State private var pages = [Page]()
+    @State private var viewModel = ViewModel()
     
     var body: some View {
         NavigationStack {
@@ -40,9 +35,9 @@ struct EditView: View {
                 }
                 
                 Section("Nearby…") {
-                    switch loadingState {
+                    switch viewModel.loadingState {
                     case .loaded:
-                        ForEach(pages, id: \.pageid) { page in
+                        ForEach(viewModel.pages, id: \.pageid) { page in
                             Text(page.title)
                                 .font(.headline)
                             + Text(": ") +
@@ -61,42 +56,20 @@ struct EditView: View {
             .toolbar {
                 Button("Save") {
                     var newLocation = location
-                        newLocation.id = UUID()
-                        newLocation.name = name
-                        newLocation.description = description
+                    newLocation.id = UUID()
+                    newLocation.name = name
+                    newLocation.description = description
 
-                        onSave(newLocation)
-                        dismiss()
+                    onSave(newLocation)
+                    dismiss()
                 }
             }
             .task {
-                await fetchNearbyPlaces()
+                await viewModel.fetchNearbyPlaces(location: location)
             }
         }
     }
     
-    func fetchNearbyPlaces() async {
-        let urlString = "https://en.wikipedia.org/w/api.php?ggscoord=\(location.latitude)%7C\(location.longitude)&action=query&prop=coordinates%7Cpageimages%7Cpageterms&colimit=50&piprop=thumbnail&pithumbsize=500&pilimit=50&wbptterms=description&generator=geosearch&ggsradius=10000&ggslimit=50&format=json"
-
-        guard let url = URL(string: urlString) else {
-            print("Bad URL: \(urlString)")
-            return
-        }
-
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-
-            // we got some data back!
-            let items = try JSONDecoder().decode(Result.self, from: data)
-
-            // success – convert the array values to our pages array
-            pages = items.query.pages.values.sorted() // { $0.title < $1.title }
-            loadingState = .loaded
-        } catch {
-            // if we're still here it means the request failed somehow
-            loadingState = .failed
-        }
-    }
     
 }
 

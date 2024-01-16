@@ -15,6 +15,7 @@
 		66FDA0B52B4DC5CC00504658 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FDA0B42B4DC5CC00504658 /* EditView.swift */; };
 		66FDA0B72B4F8BC500504658 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FDA0B62B4F8BC500504658 /* Result.swift */; };
 		66FDA0B92B50D09F00504658 /* ContentView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FDA0B82B50D09F00504658 /* ContentView-ViewModel.swift */; };
+		66FDA0BB2B5640BC00504658 /* EditView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FDA0BA2B5640BC00504658 /* EditView-ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		66FDA0B42B4DC5CC00504658 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		66FDA0B62B4F8BC500504658 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		66FDA0B82B50D09F00504658 /* ContentView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView-ViewModel.swift"; sourceTree = "<group>"; };
+		66FDA0BA2B5640BC00504658 /* EditView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditView-ViewModel.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				6653248A2B3D3E1A0082075F /* ContentView.swift */,
 				66FDA0B42B4DC5CC00504658 /* EditView.swift */,
 				66FDA0B82B50D09F00504658 /* ContentView-ViewModel.swift */,
+				66FDA0BA2B5640BC00504658 /* EditView-ViewModel.swift */,
 				66FDA0B62B4F8BC500504658 /* Result.swift */,
 				66FDA0B02B4DC31000504658 /* Location.swift */,
 				6653248C2B3D3E1C0082075F /* Assets.xcassets */,
@@ -154,6 +157,7 @@
 				6653248B2B3D3E1A0082075F /* ContentView.swift in Sources */,
 				66FDA0B92B50D09F00504658 /* ContentView-ViewModel.swift in Sources */,
 				66FDA0B72B4F8BC500504658 /* Result.swift in Sources */,
+				66FDA0BB2B5640BC00504658 /* EditView-ViewModel.swift in Sources */,
 				66FDA0B12B4DC31000504658 /* Location.swift in Sources */,
 				66FDA0B52B4DC5CC00504658 /* EditView.swift in Sources */,
 				665324892B3D3E1A0082075F /* BucketListApp.swift in Sources */,

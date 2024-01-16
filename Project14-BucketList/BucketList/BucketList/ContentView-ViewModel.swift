@@ -20,6 +20,9 @@ extension ContentView {
         private(set) var locations : [Location]
         var selectedPlace: Location?
         
+        var errorMessage = ""
+        var showingError = false
+        
         init() {
             do {
                 let data = try Data(contentsOf: savePath)
@@ -66,10 +69,14 @@ extension ContentView {
                         self.isUnlocked = true
                     } else {
                         // error
+                        self.showingError = true
+                        self.errorMessage = "Failed to authenticate"
                     }
                 }
             } else {
                 // no biometrics
+                self.showingError = true
+                self.errorMessage = "No Biometrics"
             }
         }
     }

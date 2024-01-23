@@ -39,6 +39,9 @@ struct ContentView: View {
                                     .foregroundColor(colorStyle(expense.amount))
                                     .bold()
                             }
+                            .accessibilityElement()
+                            .accessibilityLabel("\(expense.name), \(expense.amount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))")
+                            .accessibilityHint("\(expense.type) expense")
                         }
                     }
                 }
@@ -56,6 +59,9 @@ struct ContentView: View {
                                         .foregroundColor(colorStyle(expense.amount))
                                         .bold()
                                 }
+                                .accessibilityElement()
+                                .accessibilityLabel("\(expense.name), \(expense.amount, format: .currency(code: Locale.current.currency?.identifier ?? "NGN"))")
+                                .accessibilityHint("\(expense.type) expense")
                         }
                     }
                 }

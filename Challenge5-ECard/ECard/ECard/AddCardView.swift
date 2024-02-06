@@ -4,7 +4,7 @@
 //
 //  Created by Busayo Ajide on 1/21/24.
 //
-
+import MapKit
 import SwiftUI
 import PhotosUI
 import UIKit
@@ -20,6 +20,9 @@ struct AddCardView: View {
     @State private var hasImage = false
     @State private var name = "Photo name"
     
+    @State private var location : CLLocationCoordinate2D?
+    
+    let locationFetcher = LocationFetcher()
     
     var body: some View {
         NavigationStack{
@@ -39,6 +42,12 @@ struct AddCardView: View {
                                 inputImage = Image(uiImage: UIImage(data: selectedImage!)!)
                                 
                             }
+                            Task {
+                                locationFetcher.start()
+                                location = locationFetcher.lastKnownLocation ?? CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275)
+                                
+                                print(location!)
+                            }
                             
                         }
                         
@@ -52,13 +61,14 @@ struct AddCardView: View {
                         
                     }
                     .disabled(hasImage == false)
-                }            }
+                }
+            }
             .padding()
             .toolbar{
                 ToolbarItem(placement: .confirmationAction){
                     Button("Save"){
                         
-                        let card = Card(photo: selectedImage!, name: name)
+                        let card = Card(photo: selectedImage!, name: name, lat: location?.latitude ?? 51.507222, long: location?.longitude ?? -0.1275)
                         modelContext.insert(card)
                         dismiss()
                     }

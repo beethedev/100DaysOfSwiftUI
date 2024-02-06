@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		663E77272B71ED18008CD700 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663E77262B71ED18008CD700 /* LocationFetcher.swift */; };
 		668B097A2B5E3A9D00EE7A3A /* ECardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668B09792B5E3A9D00EE7A3A /* ECardApp.swift */; };
 		668B097C2B5E3A9D00EE7A3A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668B097B2B5E3A9D00EE7A3A /* ContentView.swift */; };
 		668B097E2B5E3A9E00EE7A3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 668B097D2B5E3A9E00EE7A3A /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		663E77262B71ED18008CD700 /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
 		668B09762B5E3A9D00EE7A3A /* ECard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		668B09792B5E3A9D00EE7A3A /* ECardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECardApp.swift; sourceTree = "<group>"; };
 		668B097B2B5E3A9D00EE7A3A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				668B097B2B5E3A9D00EE7A3A /* ContentView.swift */,
 				668B098D2B5E4CC900EE7A3A /* AddCardView.swift */,
 				668B09892B5E3FE200EE7A3A /* CardDetailView.swift */,
+				663E77262B71ED18008CD700 /* LocationFetcher.swift */,
 				668B09872B5E3ADA00EE7A3A /* Card.swift */,
 				668B097D2B5E3A9E00EE7A3A /* Assets.xcassets */,
 				668B097F2B5E3A9E00EE7A3A /* Preview Content */,
@@ -148,6 +151,7 @@
 			files = (
 				668B097C2B5E3A9D00EE7A3A /* ContentView.swift in Sources */,
 				668B09882B5E3ADA00EE7A3A /* Card.swift in Sources */,
+				663E77272B71ED18008CD700 /* LocationFetcher.swift in Sources */,
 				668B097A2B5E3A9D00EE7A3A /* ECardApp.swift in Sources */,
 				668B098A2B5E3FE200EE7A3A /* CardDetailView.swift in Sources */,
 				668B098E2B5E4CC900EE7A3A /* AddCardView.swift in Sources */,
@@ -286,6 +290,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ECard/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app needs your permission to show the location when new ecards are added";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -314,6 +319,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ECard/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "The app needs your permission to show the location when new ecards are added";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

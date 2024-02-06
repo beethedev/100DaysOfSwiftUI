@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 import SwiftUI
 import SwiftData
 
@@ -13,20 +14,19 @@ struct NewCard: Identifiable {
     var picture: Image
     var name: String
     var id =  UUID()
+    var location: CLLocationCoordinate2D
 }
 
-//@Observable
+
 @Model
 class Card {
-//    var items = [NewCard]()
     @Attribute(.externalStorage) var photo: Data
-//    var picture: Image
     var name: String
+    var lat = 51.507222
+    var long = -0.1275
     
-    init(photo: Data, name: String) {
-//        self.picture = picture
+    init(photo: Data, name: String, lat: Double, long: Double) {
         self.photo = photo
         self.name = name
     }
-    
 }

@@ -5,6 +5,7 @@
 //  Created by Busayo Ajide on 1/21/24.
 //
 
+import MapKit
 import SwiftUI
 import SwiftData
 import PhotosUI

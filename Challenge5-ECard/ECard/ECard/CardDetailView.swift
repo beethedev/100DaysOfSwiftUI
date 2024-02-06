@@ -5,6 +5,7 @@
 //  Created by Busayo Ajide on 1/21/24.
 //
 
+import MapKit
 import SwiftUI
 import SwiftData
 
@@ -21,9 +22,16 @@ struct CardDetailView: View {
                     .scaledToFit()
                 
                 Text(card.name)
-                    .font(.title)
+                    .font(.title2)
+                
+                Map{
+                    Marker(card.name, coordinate: CLLocationCoordinate2D(latitude: card.lat, longitude: card.long))
+                }
+                
             }
             .padding()
+            
+            
         }
     }
 }

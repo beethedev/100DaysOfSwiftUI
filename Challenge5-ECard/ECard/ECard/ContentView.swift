@@ -40,6 +40,8 @@ struct ContentView: View {
                                 }
                             }
                         }
+                        .onDelete(perform: removeRows)
+                        
                     }
                 }
             }
@@ -50,11 +52,22 @@ struct ContentView: View {
                         showingAddCard = true
                     }
                 }
+                
+//                ToolbarItem{
+//                    EditButton()
+//                }
             }
             .sheet(isPresented: $showingAddCard){
                 AddCardView()
             }
         }
+        
+        
+    }
+    
+    func removeRows(at offsets: IndexSet) {
+        // delete item
+//        try?modelContext.delete(model: Card.self)
     }
 }
 

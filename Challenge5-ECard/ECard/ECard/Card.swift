@@ -22,11 +22,17 @@ struct NewCard: Identifiable {
 class Card {
     @Attribute(.externalStorage) var photo: Data
     var name: String
-    var lat = 51.507222
-    var long = -0.1275
+    var lat : Double
+    var long : Double
+    var id = UUID()
     
-    init(photo: Data, name: String, lat: Double, long: Double) {
+    init(photo: Data, name: String, lat: Double, long: Double, id: UUID = UUID()) {
         self.photo = photo
         self.name = name
+        self.lat = lat
+        self.long = long
+        self.id = id
     }
+    
+
 }

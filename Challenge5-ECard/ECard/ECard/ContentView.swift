@@ -58,7 +58,7 @@ struct ContentView: View {
 //                }
             }
             .sheet(isPresented: $showingAddCard){
-                AddCardView()
+                AddCardView(userLocation: CLLocationCoordinate2D())
             }
         }
         
@@ -67,7 +67,8 @@ struct ContentView: View {
     
     func removeRows(at offsets: IndexSet) {
         // delete item
-//        try?modelContext.delete(model: Card.self)
+//        try?modelContext.delete(model: Card.ID)
+        
     }
 }
 

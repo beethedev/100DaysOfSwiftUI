@@ -5,6 +5,7 @@
 //  Created by Busayo Ajide on 1/21/24.
 //
 import MapKit
+import SwiftData
 import SwiftUI
 import PhotosUI
 import UIKit
@@ -18,9 +19,10 @@ struct AddCardView: View {
     @State private var inputImage : Image?
     @State private var selectedImage : Data?
     @State private var hasImage = false
-    @State private var name = "Photo name"
+    @State private var name = "Enter name"
     
-    @State private var location : CLLocationCoordinate2D?
+
+    @State var userLocation : CLLocationCoordinate2D
     
     let locationFetcher = LocationFetcher()
     
@@ -44,9 +46,6 @@ struct AddCardView: View {
                             }
                             Task {
                                 locationFetcher.start()
-                                location = locationFetcher.lastKnownLocation ?? CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275)
-                                
-                                print(location!)
                             }
                             
                         }
@@ -58,7 +57,6 @@ struct AddCardView: View {
                     
                     Section{
                         TextField("Name", text: $name)
-                        
                     }
                     .disabled(hasImage == false)
                 }
@@ -67,8 +65,16 @@ struct AddCardView: View {
             .toolbar{
                 ToolbarItem(placement: .confirmationAction){
                     Button("Save"){
+                        if let location = locationFetcher.lastKnownLocation {
+                            userLocation = location
+                        } else {
+//                            use location for Apple in Cupertino
+                            userLocation = CLLocationCoordinate2D(latitude: 37.3346, longitude: 122.0090)
+                        }
+
                         
-                        let card = Card(photo: selectedImage!, name: name, lat: location?.latitude ?? 51.507222, long: location?.longitude ?? -0.1275)
+                        let card = Card(photo: selectedImage!, name: name, lat: userLocation.latitude , long: userLocation.longitude)
+
                         modelContext.insert(card)
                         dismiss()
                     }
@@ -80,9 +86,10 @@ struct AddCardView: View {
                 }
             }
         }
+
     }
 }
 
-//#Preview {
-////    AddCardView()
-//}
+#Preview {
+    AddCardView(userLocation: CLLocationCoordinate2D())
+}

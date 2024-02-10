@@ -37,5 +37,5 @@ struct CardDetailView: View {
 }
 
 //#Preview {
-//    CardDetailView(card: Card)
+//    CardDetailView()
 //}

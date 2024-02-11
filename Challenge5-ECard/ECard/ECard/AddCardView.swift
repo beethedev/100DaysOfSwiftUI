@@ -19,7 +19,7 @@ struct AddCardView: View {
     @State private var inputImage : Image?
     @State private var selectedImage : Data?
     @State private var hasImage = false
-    @State private var name = "Enter name"
+    @State private var name = ""
     
 
     @State var userLocation : CLLocationCoordinate2D

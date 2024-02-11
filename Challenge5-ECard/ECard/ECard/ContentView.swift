@@ -15,7 +15,6 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Card.name) var cards: [Card]
     
-//    @State private var cards = Card()
     
     var body: some View {
         NavigationStack{
@@ -40,7 +39,7 @@ struct ContentView: View {
                                 }
                             }
                         }
-                        .onDelete(perform: removeRows)
+                        .onDelete(perform: deleteCard)
                         
                     }
                 }
@@ -53,9 +52,9 @@ struct ContentView: View {
                     }
                 }
                 
-//                ToolbarItem{
-//                    EditButton()
-//                }
+                ToolbarItem{
+                    EditButton()
+                }
             }
             .sheet(isPresented: $showingAddCard){
                 AddCardView(userLocation: CLLocationCoordinate2D())
@@ -65,9 +64,11 @@ struct ContentView: View {
         
     }
     
-    func removeRows(at offsets: IndexSet) {
-        // delete item
-//        try?modelContext.delete(model: Card.ID)
+    func deleteCard(at offsets: IndexSet) {
+        for offset in offsets {
+            let card = cards[offset]
+            modelContext.delete(card)
+        }
         
     }
 }

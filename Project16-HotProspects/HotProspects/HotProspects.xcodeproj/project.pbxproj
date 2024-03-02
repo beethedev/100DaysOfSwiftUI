@@ -15,6 +15,7 @@
 		663E772C2B771E6C008CD700 /* ProspectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663E772B2B771E6C008CD700 /* ProspectsView.swift */; };
 		663E772E2B771E7B008CD700 /* MeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663E772D2B771E7B008CD700 /* MeView.swift */; };
 		663E77302B771FD0008CD700 /* Prospect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663E772F2B771FD0008CD700 /* Prospect.swift */; };
+		665F26792B92D9730077051C /* EditContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 665F26782B92D9730077051C /* EditContactView.swift */; };
 		6695FFE22B8062560036C3B4 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = 6695FFE12B8062560036C3B4 /* CodeScanner */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		663E772B2B771E6C008CD700 /* ProspectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectsView.swift; sourceTree = "<group>"; };
 		663E772D2B771E7B008CD700 /* MeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeView.swift; sourceTree = "<group>"; };
 		663E772F2B771FD0008CD700 /* Prospect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prospect.swift; sourceTree = "<group>"; };
+		665F26782B92D9730077051C /* EditContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditContactView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 		663E770C2B7180E8008CD700 = {
 			isa = PBXGroup;
 			children = (
+				665F26782B92D9730077051C /* EditContactView.swift */,
 				663E77172B7180E8008CD700 /* HotProspects */,
 				663E77162B7180E8008CD700 /* Products */,
 			);
@@ -163,6 +166,7 @@
 				663E772C2B771E6C008CD700 /* ProspectsView.swift in Sources */,
 				663E771B2B7180E8008CD700 /* ContentView.swift in Sources */,
 				663E77192B7180E8008CD700 /* HotProspectsApp.swift in Sources */,
+				665F26792B92D9730077051C /* EditContactView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +303,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need to scan QR codes";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We want to save your QR code";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -328,6 +333,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "We need to scan QR codes";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We want to save your QR code";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
